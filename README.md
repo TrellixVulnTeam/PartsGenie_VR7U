@@ -13,6 +13,7 @@ Required information:
 * **-input_format**: (string) Format of the input (tar or sbol)
 * **-taxonomy_input**: (string) Either string or path to json file
 * **-taxonomy_format**: (string) Format of the input format (string or json)
+* **-server_url**: (string) IP address of PartsGenie
 
 ## Output
 
