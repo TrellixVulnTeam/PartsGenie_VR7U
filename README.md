@@ -18,6 +18,10 @@ Required information:
 
 * **output**: (string) Path to the tar or sbol output
 
+## Prerequisites
+
+* Base Docker Image: [python:3.7](https://hub.docker.com/_/python)
+
 ## Installing
 
 To build the image using the Dockerfile, use the following command:
@@ -33,10 +37,6 @@ To run the test, untar the test.tar.xz file and run the following command:
 ```
 python run.py -input test/input.sbol -input_format sbol -taxonomy_input 8333 taxonomy_format string -output test/test_output.sbol
 ```
-
-## Prerequisites
-
-* Base Docker Image: [python:3.7](https://hub.docker.com/_/python)
 
 ## Contributing
 
