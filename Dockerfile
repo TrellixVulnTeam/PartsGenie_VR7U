@@ -15,3 +15,5 @@ RUN apt-get install git
 RUN git clone https://github.com/neilswainston/PartsGenieClient.git
 
 RUN mv PartsGenieClient/parts_genie/client.py /home/rpTool.py
+
+COPY tool_PartsGenie.py /home/
