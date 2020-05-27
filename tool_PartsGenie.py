@@ -51,7 +51,7 @@ if __name__ == "__main__":
                 rf.extractall(tmpInputFolder)
             in_files = glob.glob(tmpInputFolder+'/*')
             #write the tar
-            with tarfile.open(params.output, mode='w:xz') as ot:
+            with tarfile.open(params.output, mode='w:gz') as ot:
                 for sbol in in_files:
                     with tempfile.TemporaryDirectory() as tmpOutputFolder:
                         client.run(sbol, tax_id, tmpOutputFolder)
