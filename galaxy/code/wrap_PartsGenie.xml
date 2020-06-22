@@ -1,0 +1,119 @@
+<tool id="PartsGenie" name="Parts Genie" version="0.1">
+  <description>Given a SBOL input, run PartsGenie</description>
+  <requirements>
+    <container type="docker">brsynth/partsgenie-standalone:dev</container>
+  </requirements>
+  <stdio>
+		<regex match="WARNING:" level="warning" />
+		<regex match="ERROR:" level="error" />
+	</stdio>
+  <command detect_errors="exit_code"><![CDATA[
+    '$__tool_directory__/tool_PartsGenie.py' -input '$input.input_sbol' -input_format '$input.format' -output '$output' -taxonomy_format '$taxonomy.format_tax' -taxonomy_input '$taxonomy.input_tax' -server_url '$adv.server_url'
+  ]]></command>
+  <inputs>
+    <conditional name="input">
+      <param name="format" type="select" label="SBOL input/output">
+        <option value="tar">TAR</option>
+        <option value="sbol" selected="True">SBOL</option>
+      </param>
+      <when value="tar">
+        <param name="input_sbol" type="data" format="tar" label="Input file" />
+      </when>
+      <when value="sbol">
+        <param name="input_sbol" type="data" format="xml" label="Input file" />
+      </when>
+    </conditional>
+    <conditional name="taxonomy">
+      <param name="format_tax" type="select" label="Taxonomy ID input format">
+        <option value="string" selected="True">ID</option>
+        <option value="json">JSON</option>
+      </param>
+      <when value="string">
+        <param name="input_tax" type="text" value="83333" label="Taxonomy input" />
+      </when>
+      <when value="json">
+        <param name="input_tax" type="data" format="json" label="Taxonomy input" />
+      </when>
+    </conditional>
+		<section name="adv" title="Advanced Options" expanded="false">
+			<param name="server_url" type="text" value="http://172.28.0.2:5000/" label="Parts Genie IP address" />
+		</section>
+  </inputs>
+  <outputs>
+    <data name="output" type="data" format="xml" label="PartsGenie">
+      <change_format>
+        <when input="input.format" value="tar" format="tar"/>
+      </change_format>
+    </data>
+  </outputs>
+  <help><![CDATA[
+PartsGenie
+==========
+
+This tool allows for the design and optimization of novel, reusable synthetic biology parts.
+For each enzyme predicted, it recovers the DNA sequence from the UNIPROT ID, runs a codon optimization protocol, and adds various strength calculated RBS (ribosome binding site) to it.
+
+
+Input
+-----
+
+Required:
+
+
+* **-input**\ : (string) Path to the input file
+* **-input_format**\ : (string) Format of the input (tar or sbol)
+* **-taxonomy_input**\ : (string) Either string or path to json file
+* **-taxonomy_format**\ : (string) Format of the input format (string or json)
+
+Output
+------
+
+
+* **output**\ : (string) Path to the tar or sbol output
+
+Project Links
+---------------------
+
+* `Original Project <https://github.com/neilswainston/PartsGenie>`_
+* `GitHub <https://github.com/Galaxy-SynBioCAD/PartsGenie>`_
+
+Version
+----------
+
+v0.1
+
+Authors
+-------
+
+* **Neil Swainston**
+* Melchior du Lac
+
+License
+-------
+
+`MIT <https://raw.githubusercontent.com/neilswainston/PartsGenie/master/LICENSE>`_
+
+
+Acknowledgments
+---------------
+
+
+* Thomas Duigou
+* Joan Hérisson
+
+]]></help>
+  <citations>
+    <citation type="bibtex">
+@article{swainston2018partsgenie,
+  title={PartsGenie: an integrated tool for optimizing and sharing synthetic biology parts},
+  author={Swainston, Neil and Dunstan, Mark and Jervis, Adrian J and Robinson, Christopher J and Carbonell, Pablo and Williams, Alan R and Faulon, Jean-Loup and Scrutton, Nigel S and Kell, Douglas B},
+  journal={Bioinformatics},
+  volume={34},
+  number={13},
+  pages={2327--2329},
+  year={2018},
+  publisher={Oxford University Press}
+}
+    </citation>
+  </citations>
+</tool>
