@@ -1,7 +1,7 @@
 <tool id="PartsGenie" name="Parts Genie" version="0.1">
   <description>Given a SBOL input, run PartsGenie</description>
   <requirements>
-    <container type="docker">brsynth/partsgenie-standalone:dev</container>
+    <container type="docker">brsynth/partsgenie-standalone</container>
   </requirements>
   <stdio>
 		<regex match="WARNING:" level="warning" />
