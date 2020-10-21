@@ -22,6 +22,13 @@ Required information:
 ## Prerequisites
 
 * Base Docker Image: [python:3.7](https://hub.docker.com/_/python)
+* [PartsGenie](https://github.com/neilswainston/PartsGenie-legacy) REST instance running
+
+WARNING: must add to the Dockerfile of [PartsGenie](https://github.com/neilswainston/PartsGenie-legacy) the following line:
+
+```
+RUN pip install --ignore-installed requests==2.12.4
+```
 
 ## Installing
 
@@ -60,4 +67,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Thomas Duigou
 * Joan Hérisson
 
-### How to cite rpOptBioDes?
